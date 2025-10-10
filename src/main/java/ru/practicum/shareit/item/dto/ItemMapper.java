@@ -3,6 +3,7 @@ package ru.practicum.shareit.item.dto;
 import ru.practicum.shareit.item.model.Item;
 
 // С MapStruct пока не разобрался
+
 public class ItemMapper {
 
     public static ItemDto toItemDto(Item item) {

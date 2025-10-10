@@ -1,7 +1,9 @@
 package ru.practicum.shareit.user.dto;
 
 import ru.practicum.shareit.user.User;
+
 // С MapStruct пока не разобрался
+
 public class UserMapper {
 
     public static UserDto toUserDto(User user) {

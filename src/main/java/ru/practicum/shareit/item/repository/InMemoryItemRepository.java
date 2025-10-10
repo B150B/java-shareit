@@ -50,7 +50,8 @@ public class InMemoryItemRepository implements ItemRepository {
     @Override
     public List<Item> getAllItems() {
         log.info("Запрошен список всех предметов");
-        return itemMap.values().stream().toList();
+        return itemMap.values().stream()
+                .toList();
     }
 
     @Override

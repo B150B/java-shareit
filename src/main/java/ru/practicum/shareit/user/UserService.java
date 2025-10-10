@@ -3,9 +3,11 @@ package ru.practicum.shareit.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.user.dto.UserDto;
+import ru.practicum.shareit.user.dto.UserMapper;
 import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -16,29 +18,25 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+    public List<UserDto> getAllUsers() {
+        return userRepository.getAllUsers().stream()
+                .map(UserMapper::toUserDto)
+                .collect(Collectors.toList());
     }
 
-    public User createUser(User user) {
-        return userRepository.create(user);
+    public UserDto createUser(UserDto userDto) {
+        return UserMapper.toUserDto(userRepository.create(UserMapper.toUser(userDto)));
     }
 
-    public User updateUser(Long userId, UserDto userDto) {
-        User existingUser = userRepository.findUser(userId);
+    public UserDto updateUser(Long userId, UserDto userDto) {
+        User updatingUser = UserMapper.toUser(userDto);
+        updatingUser.setId(userId);
 
-        if (userDto.getName() != null) {
-            existingUser.setName(userDto.getName());
-        }
-        if (userDto.getEmail() != null) {
-            existingUser.setEmail(userDto.getEmail());
-        }
-
-        return userRepository.update(existingUser);
+        return UserMapper.toUserDto(userRepository.update(updatingUser));
     }
 
-    public User findUserById(Long userId) {
-        return userRepository.findUser(userId);
+    public UserDto findUserById(Long userId) {
+        return UserMapper.toUserDto(userRepository.findUser(userId));
     }
 
     public void deleteUserById(Long userId) {

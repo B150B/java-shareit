@@ -29,8 +29,8 @@ public class UserService {
     }
 
     public UserDto createUser(UserDto userDto) {
-        userRepository.findByEmail(userDto.getEmail()).
-                ifPresent(user -> {
+        userRepository.findByEmail(userDto.getEmail())
+                .ifPresent(user -> {
                     throw new ValidationException("Email уже зарегистрирован");
                 });
 

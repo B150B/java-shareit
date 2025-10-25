@@ -1,7 +1,6 @@
 package ru.practicum.shareit.booking;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.User;
@@ -19,11 +18,9 @@ public class Booking {
     private Long id;
 
     @Column(name = "start_date", nullable = false)
-    @NotNull
     private LocalDateTime start;
 
     @Column(name = "end_date", nullable = false)
-    @NotNull
     private LocalDateTime end;
 
     @ManyToOne(fetch = FetchType.LAZY)

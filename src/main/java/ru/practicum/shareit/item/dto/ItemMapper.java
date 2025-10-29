@@ -2,6 +2,9 @@ package ru.practicum.shareit.item.dto;
 
 import ru.practicum.shareit.item.model.Item;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 // С MapStruct пока не разобрался
 
 public class ItemMapper {
@@ -36,4 +39,42 @@ public class ItemMapper {
             item.setAvailable(dto.getAvailable());
         }
     }
+
+    public static ItemBookingDto toItemBookingDto(Item item, LocalDateTime lastBooking, LocalDateTime nextBooking) {
+        ItemBookingDto dto = new ItemBookingDto();
+        dto.setId(item.getId());
+        dto.setName(item.getName());
+        dto.setDescription(item.getDescription());
+        dto.setAvailable(item.getAvailable());
+        dto.setLastBooking(lastBooking);
+        dto.setNextBooking(nextBooking);
+        return dto;
+    }
+
+    public static ItemWithCommentsDto toItemWithCommentsDto(Item item, List<CommentDto> comments) {
+        ItemWithCommentsDto dto = new ItemWithCommentsDto();
+        dto.setId(item.getId());
+        dto.setName(item.getName());
+        dto.setDescription(item.getDescription());
+        dto.setAvailable(item.getAvailable());
+        dto.setComments(comments);
+        return dto;
+    }
+
+    public static ItemWithCommentsDto toItemWithCommentsDto(Item item,
+                                                            LocalDateTime lastBooking,
+                                                            LocalDateTime nextBooking,
+                                                            List<CommentDto> comments) {
+        ItemWithCommentsDto dto = new ItemWithCommentsDto();
+        dto.setId(item.getId());
+        dto.setName(item.getName());
+        dto.setDescription(item.getDescription());
+        dto.setAvailable(item.getAvailable());
+        dto.setLastBooking(lastBooking);
+        dto.setNextBooking(nextBooking);
+        dto.setComments(comments);
+        return dto;
+    }
+
+
 }
